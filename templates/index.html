@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+  <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+  <title>AI Haiku Poet</title>
+</head>
+
+<body>
+  <main class="container">
+    <h4>AI Haiku Poet</h2>
+      <form hx-trigger="submit" hx-post="/get-haiku" hx-target="#haiku-result">
+        <div class="grid" style="display: flex; align-items: center;">
+          <input type="text" id="theme" name="theme" placeholder="Enter Haiku Theme" required autocomplete="off"
+            style="width: 70%;">
+          <button type="submit" style="margin-left: 10px; width: 30%">Submit</button>
+        </div>
+      </form>
+      <div id="haiku-result">
+      </div>
+  </main>
+</body>
+
+</html>
