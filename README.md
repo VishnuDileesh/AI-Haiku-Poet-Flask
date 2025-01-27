@@ -62,7 +62,7 @@ GET /haiku?theme={theme}
 
 Example request:
 ```bash
-curl "http://localhost:8000/haiku?theme=spring"
+curl "http://localhost:8000/haiku?theme=inkling"
 ```
 
 Example response:
