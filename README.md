@@ -134,6 +134,9 @@ The `gunicorn.conf.py` file includes production-ready settings:
 - Set up proper monitoring and logging
 - Implement rate limiting and security measures as needed
 
+![CleanShot 2025-01-27 at 11 22 44@2x](https://github.com/user-attachments/assets/d1f649ef-50ac-437f-b746-1ecbc3b94c76)
+
+
 ## License
 
 MIT License 
