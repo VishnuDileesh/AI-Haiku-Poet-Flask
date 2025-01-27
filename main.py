@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
@@ -27,11 +27,20 @@ system_message_prompt = SystemMessagePromptTemplate.from_template(system_templat
 
 chat_prompt = ChatPromptTemplate.from_messages([system_message_prompt, human_message_prompt])
 
-@app.route("/haiku")
-def read_haiku():
-    theme = request.args.get('theme', None)
+
+
+
+@app.route("/")
+def index():
+    return render_template('index.html')
+
+@app.route("/get-haiku", methods=['POST'])
+def get_haiku():
+    theme = request.form.get('theme', None)
     haiku = chatllm.invoke(chat_prompt.format_prompt(theme=theme).to_messages())
-    return jsonify({"Haiku": haiku.content})
+    formatted_haiku = haiku.content.replace("\n", "<br>")
+    return f"<h3 style='white-space: pre-wrap;'>{formatted_haiku}</h3>"
+
 
 @app.route("/health")
 def read_health():
@@ -39,3 +48,6 @@ def read_health():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
