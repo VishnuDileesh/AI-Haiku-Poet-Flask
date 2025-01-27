@@ -1,12 +1,13 @@
 # AI Haiku Poet
 
-A Flask-based web service that generates beautiful haikus about any theme using OpenAI's GPT-3.5 model.
+A Flask-based web application that generates beautiful haikus about any theme using OpenAI's GPT-3.5 model. Features a simple web interface with HTMX for seamless interactions.
 
 ## Features
 
-- Generate unique haikus based on user-provided themes
-- RESTful API endpoints
-- Powered by OpenAI's GPT-3.5 model
+- Clean, minimal web interface
+- HTMX-powered form submissions
+- OpenAI GPT-3.5 for haiku generation
+- Line-break preserved haiku display
 - Health check endpoint
 - Production-ready Gunicorn configuration
 
@@ -52,27 +53,36 @@ gunicorn -c gunicorn.conf.py main:app
 ```
 This will start the server on http://0.0.0.0:8000 with optimized settings.
 
-## API Endpoints
+## Using the Application
 
-### Generate a Haiku
+### Web Interface
+Visit the root URL (e.g., http://localhost:5000) to access the web interface:
+1. Enter a theme in the input field
+2. Click "Submit"
+3. The haiku will appear below with proper formatting and line breaks
+
+### API Endpoints
+
+#### Generate Haiku
 ```
-GET /haiku?theme={theme}
+POST /get-haiku
 ```
+Parameters (form data):
 - `theme`: The theme for the haiku
 
 Example request:
 ```bash
-curl "http://localhost:8000/haiku?theme=inkling"
+curl -X POST -F "theme=inkling" http://localhost:8000/get-haiku
 ```
 
 Example response:
-```json
-{
-    "Haiku": "Inkling of the mind,\nNature's whispers on the wind,\nInspiration finds."
-}
+```html
+<h3 style='white-space: pre-wrap;'>Inkling’s gentle sway<br>Whispers secrets in the breeze<br>Nature’s silent muse</h3>
 ```
 
-### Health Check
+Note: The endpoint returns formatted HTML with preserved line breaks for direct display.
+
+#### Health Check
 ```
 GET /health
 ```
@@ -88,12 +98,28 @@ Example response:
 }
 ```
 
+## Project Structure
+
+- `main.py`: Flask application and route handlers
+- `templates/index.html`: Simple web interface with HTMX
+- `gunicorn.conf.py`: Production server configuration
+- `.env`: Configuration for API keys and environment
+- `requirements.txt`: Project dependencies
+
+## Technology Stack
+
+- Flask: Lightweight web framework
+- OpenAI GPT-3.5: AI model for haiku generation
+- HTMX: Simple frontend interactivity
+- Pico CSS: Minimal styling framework
+- Gunicorn: Production WSGI server
+
 ## Configuration
 
 ### Gunicorn Settings
 The `gunicorn.conf.py` file includes production-ready settings:
 - Dynamic worker count based on CPU cores
-- Proper logging configuration
+- Logging configuration
 - Development mode auto-reload
 - Connection handling optimization
 
